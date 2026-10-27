@@ -1,0 +1,28 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "memorialCounts": {
+      ".read": true,
+      "fatiha": {
+        ".write": "auth != null && newData.exists() && newData.isNumber() && newData.val() == (data.exists() ? data.val() + 1 : 1)",
+        ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 9007199254740991"
+      },
+      "ikhlas": {
+        ".write": "auth != null && newData.exists() && newData.isNumber() && newData.val() == (data.exists() ? data.val() + 1 : 1)",
+        ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 9007199254740991"
+      },
+      "darood": {
+        ".write": "auth != null && newData.exists() && newData.isNumber() && newData.val() == (data.exists() ? data.val() + 1 : 1)",
+        ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 9007199254740991"
+      },
+      "istighfar": {
+        ".write": "auth != null && newData.exists() && newData.isNumber() && newData.val() == (data.exists() ? data.val() + 1 : 1)",
+        ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 9007199254740991"
+      },
+      "$other": {
+        ".validate": false
+      }
+    }
+  }
+}
