@@ -1,0 +1,1 @@
+(()=>{let l='en',t='light';try{l=localStorage.getItem('joyia-language')||l;t=localStorage.getItem('joyia-theme')||t}catch(e){}l=l==='ur'?'ur':'en';t=t==='dark'?'dark':'light';document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';document.documentElement.dataset.theme=t})();
