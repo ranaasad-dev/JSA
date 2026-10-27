@@ -1,0 +1,1 @@
+Is folder mein apni photos upload karein. Phir assets/js/site-content.js ki gallery list mein entries add karein.
