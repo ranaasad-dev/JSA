@@ -77,7 +77,85 @@ function renderMemorial(){const select=document.querySelector('#recitation-selec
 const memorialDialog=document.querySelector('#memorial-dialog');
 if(memorialDialog){let opener;const audio=document.querySelector('#memorial-audio');document.querySelectorAll('[data-open-memorial]').forEach(b=>b.onclick=()=>{opener=b;memorialDialog.showModal()});document.querySelector('#memorial-close').onclick=()=>memorialDialog.close();memorialDialog.addEventListener('close',()=>{audio.pause();opener?.focus()});const select=document.querySelector('#recitation-select');audio.src=C.remembrance.tracks[0].src;select.onchange=()=>{audio.pause();audio.src=C.remembrance.tracks[Number(select.value)].src;document.querySelector('#audio-status').textContent=''};audio.onerror=()=>document.querySelector('#audio-status').textContent=tr(C.remembrance.audioError);document.querySelector('#reset-counters').onclick=()=>{counts=[];save('joyia-recitation','[]');renderMemorial()}}
 const prevPhoto=document.querySelector('#photo-prev'),nextPhoto=document.querySelector('#photo-next');if(prevPhoto){prevPhoto.onclick=()=>{if(activePhoto>0){activePhoto--;showPropertyPhoto()}};nextPhoto.onclick=()=>{if(activePhoto<activePhotos.length-1){activePhoto++;showPropertyPhoto()}}}
-
 render();
 updateTopButton();
+
+// Automatically show images uploaded to the GitHub gallery folder.
+async function loadUploadedGalleryPictures() {
+  // Only run on the Gallery page.
+  if (!document.querySelector('#gallery')) return;
+
+  try {
+    const url =
+      'https://api.github.com/repos/ranaasad-dev/JSA/contents/assets/images/gallery?ref=main';
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Gallery listing unavailable');
+    }
+
+    const files = await response.json();
+
+    if (!Array.isArray(files)) {
+      throw new Error('Unexpected gallery response');
+    }
+
+    // Remember photos already listed in site-content.js.
+    const used = new Set(
+      C.gallery.flatMap(item =>
+        propertyPhotos(item).map(photo => {
+          try {
+            return decodeURIComponent(photo.src);
+          } catch {
+            return photo.src;
+          }
+        })
+      )
+    );
+
+    for (const file of files) {
+      // Only add common image formats.
+      if (
+        file.type !== 'file' ||
+        !(/\.(png|jpe?g|webp|gif)$/i).test(file.name)
+      ) {
+        continue;
+      }
+
+      const originalPath = 'assets/images/gallery/' + file.name;
+
+      // Do not add an existing photo twice.
+      if (used.has(originalPath)) continue;
+
+      const imagePath =
+        'assets/images/gallery/' + encodeURIComponent(file.name);
+
+      // Use the file name as the picture title.
+      const title = file.name
+        .replace(/\.[^.]+$/, '')
+        .replace(/[-_]+/g, ' ');
+
+      C.gallery.push({
+        src: imagePath,
+        caption: {
+          en: title,
+          ur: title
+        },
+        alt: {
+          en: title,
+          ur: title
+        }
+      });
+
+      used.add(originalPath);
+    }
+
+    renderGallery();
+  } catch (error) {
+    console.warn('Automatic gallery could not load:', error);
+  }
+}
+
+loadUploadedGalleryPictures();
 })();
