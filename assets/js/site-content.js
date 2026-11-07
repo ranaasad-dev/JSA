@@ -163,7 +163,24 @@ window.SITE_CONTENT = {
     "photos": [
       "assets/images/gallery/property-1.png"
     ]
-  }
+  },
+   {
+  "id": "JEA-90AC-002",
+  "category": "agricultural",
+  "caption": {
+    "en": "Agricultural Land",
+    "ur": "90 ایکڑ زرعی زمین"
+  },
+  "alt": {
+    "en": "Agricultural Land",
+    "ur": "90 ایکڑ زرعی زمین"
+  },
+  "photos": [
+    "assets/images/gallery/property-2.png"
+  ],
+  "status": "available",
+  "updated": "2026-11-07"
+}
 ],
   "labels": {
     "home": {
