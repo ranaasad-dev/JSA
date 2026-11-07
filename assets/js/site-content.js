@@ -148,7 +148,23 @@ window.SITE_CONTENT = {
       "icon": "key"
     }
   ],
-  "gallery": [],
+ "gallery": [
+  {
+    "id": "JEA-001",
+    "category": "plots",
+    "caption": {
+      "en": "Property poster",
+      "ur": "پراپرٹی کا پوسٹر"
+    },
+    "alt": {
+      "en": "Property poster",
+      "ur": "پراپرٹی کا پوسٹر"
+    },
+    "photos": [
+      "assets/images/gallery/property-1.png"
+    ]
+  }
+],
   "labels": {
     "home": {
       "en": "Home",
