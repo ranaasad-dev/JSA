@@ -1,0 +1,24 @@
+Verification performed 2026-11-08
+
+PASS
+- JavaScript parse checks on modified scripts.
+- Shared model: baseline compatibility, 2 memorial tracks, 4 fixed counter labels,
+  empty gallery, URL validation, invalid photos, duplicate category rejection.
+- Real public Supabase REST read: jsa_content returned HTTP 200 and an empty list.
+- Browser preview: homepage rendered; developer dialog kept all supplied social links.
+- Browser preview: both supplied recitations reached playing state.
+- Browser preview: existing Firebase shared totals loaded. No counts incremented/reset.
+- Local simulated backend: all 16 admin sections rendered; bilingual homepage edit saved;
+  missing image rejected; property with image + Sold status saved and reloaded;
+  private inquiry form saved. No test data sent to live Supabase.
+- Responsive 390px iframe review: public site and Admin navigation; Urdu public layout.
+- Actual admin login page rendered without a missing-SDK error.
+
+NOT VERIFIED YET
+- Login with the user's real admin credentials.
+- Authenticated live upload, update, delete, and denial for a second authenticated user.
+- Private inquiries table and timestamp trigger until ADMIN-SETUP.sql is run.
+- Live GitHub deployment and any newer live-repository changes outside the supplied ZIP.
+- Social preview cache refresh after static metadata changes.
+
+The local QA mock fixture and test data are NOT included in the upgrade ZIP.

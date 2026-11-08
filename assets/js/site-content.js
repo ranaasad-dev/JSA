@@ -148,40 +148,7 @@ window.SITE_CONTENT = {
       "icon": "key"
     }
   ],
- "gallery": [
-  {
-    "id": "JEA-001",
-    "category": "plots",
-    "caption": {
-      "en": "Property poster",
-      "ur": "پراپرٹی کا پوسٹر"
-    },
-    "alt": {
-      "en": "Property poster",
-      "ur": "پراپرٹی کا پوسٹر"
-    },
-    "photos": [
-      "assets/images/gallery/property-1.png"
-    ]
-  },
-   {
-  "id": "JEA-90AC-002",
-  "category": "agricultural",
-  "caption": {
-    "en": "Agricultural Land",
-    "ur": "90 ایکڑ زرعی زمین"
-  },
-  "alt": {
-    "en": "Agricultural Land",
-    "ur": "90 ایکڑ زرعی زمین"
-  },
-  "photos": [
-    "assets/images/gallery/property-2.png"
-  ],
-  "status": "available",
-  "updated": "2026-11-07"
-}
-],
+  "gallery": [],
   "labels": {
     "home": {
       "en": "Home",

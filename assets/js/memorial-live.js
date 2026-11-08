@@ -1,3 +1,4 @@
+await window.JSA_CONTENT_READY;
 const box=document.querySelector('#global-counters'),status=document.querySelector('#global-status');
 const keys=['fatiha','ikhlas','darood','istighfar'];let values={},ready=false,connected=false,api=null,pending=new Set(),state='setup';
 const words={setup:['Live totals are not connected yet. Personal counters below still work.','مجموعی گنتی ابھی منسلک نہیں۔ نیچے ذاتی کاؤنٹر استعمال کر سکتے ہیں۔'],connecting:['Connecting to live totals…','مجموعی گنتی سے رابطہ ہو رہا ہے…'],live:['Live totals across all visitors','تمام زائرین کی مجموعی گنتی'],offline:['Connection unavailable. Please try again when online.','رابطہ دستیاب نہیں۔ انٹرنیٹ آنے پر دوبارہ کوشش کریں۔'],auth:['Shared totals are unavailable. Please try again later.','مجموعی گنتی دستیاب نہیں۔ بعد میں دوبارہ کوشش کریں۔'],error:['Could not save the count. Please try again.','گنتی محفوظ نہیں ہو سکی۔ دوبارہ کوشش کریں۔']};

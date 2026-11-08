@@ -1,0 +1,90 @@
+JSA ADMIN UPGRADE - SIMPLE ROMAN URDU GUIDE
+
+STATUS
+Yeh aapki di hui Oct 27 ZIP ki test-copy par banaya gaya upgrade hai.
+Gallery aapke kehne par khaali rakhi gayi hai. Live GitHub site abhi change nahi ki.
+Firebase config, database rules, existing audio aur original images change nahi kiye.
+Memorial JS mein sirf public content load hone ka wait add kiya hai.
+
+STEP 1 - ADDITIONAL DATABASE SETUP
+ADMIN-SETUP.sql ko Notepad mein kholein.
+Poora text Supabase > SQL Editor > New query mein paste karke Run karein.
+Yeh private inquiry notes ki table, edit-conflict timestamp aur image limits set karta hai.
+End par policy rows dikh sakti hain. Yeh error nahi.
+Purana jsa_content table aur jsa-images bucket already bane hone chahiye.
+Firebase console mein is SQL ko run NA karein.
+
+STEP 2 - BACKUP AND LOCAL TEST (LIVE PAR ABHI UPLOAD NA KAREIN)
+GitHub se apni latest JSA repository ki ZIP download karke backup rakhein.
+Us latest project ki ek ALAG test-copy banayein.
+Is upgrade ZIP ke andar JSA-Admin-Upgrade folder kholein.
+Iske CONTENTS test-copy mein paste karein (index.html ke saath admin folder hona chahiye).
+Same-name files replace karein. Purana assets folder poora DELETE NA karein.
+Existing assets/images aur assets/audio files test-copy mein rehni zaroori hain.
+ZIP file ko repository mein upload karne se website upgrade nahi hogi; extracted files chahiye.
+
+VS Code mein test-copy open karke Live Server se index.html open karein.
+Ya Python installed ho to test-copy folder ki CMD mein:
+  python -m http.server 8000
+Phir browser mein:
+  http://localhost:8000/admin/
+File ko double-click (file://) karne ke bajaye HTTP server use karein.
+
+STEP 3 - ADMIN TEST
+Apna Supabase Authentication mein banaya email/password use karein.
+Database wala password yahan use nahi hota.
+First login par bundled content dikhega jab database mein website row nahi hogi.
+Publish changes se content Supabase mein save hoga. Purani live website abhi is table se
+connected nahi hai, is liye pehle local public gallery ko refresh karke test karein.
+1. Ek test property add karein, image upload karein, Publish changes.
+2. Local gallery refresh karein: photo, reference, Urdu/English aur WhatsApp message check.
+3. Available ko Sold karke publish karein aur check karein.
+4. Test property delete karke publish karein. Gallery wapas empty ho jayegi.
+5. Private enquiry note add/edit/delete test karein. Public content mein customer notes na daalein.
+6. Sign out. Admin content ab hidden hona chahiye.
+7. Memorial dono audio, existing live totals, Developer popup aur mobile contacts check karein.
+8. SQL policies ke result mein UUID sirf aapka ho aur kisi doosri policy se public writes na milti hon.
+
+STEP 4 - DEPLOY ONLY AFTER REVIEW
+Local test pass hone aur aapke review ke baad hi updated files GitHub JSA main branch par daalein.
+Aapki live repository mein is ZIP se baad ki unrelated changes hon to pehle unko compare/merge karein.
+Photos/audio ko dobara upload karna zaroori nahi: update ZIP mein woh shamil nahi hain.
+GitHub Pages successful deployment ke baad public site ke /admin/ path par dashboard milega.
+Admin page ka URL secret hona security nahi: Supabase RLS exact Main Admin UID check karti hai.
+Secret/service_role key kabhi frontend, GitHub ya chat mein na rakhein.
+
+DAILY USE
+Properties & gallery > Add property > Details > Pictures > Publish changes.
+Reference JEA-001, JEA-002... automatically suggest hota hai; duplicate allowed nahi.
+English aur Urdu dono fields fill karein. Empty Urdu par English fallback hota hai.
+Price sirf owner ki confirmation par likhein. Khaali price public card par nahi dikhayi jayegi.
+Cover button se first image select karein. Delete property se photo storage se delete nahi hoti.
+Image library mein unused photos alag delete kar sakte hain.
+JPG/PNG/WebP upload: original maximum 20 MB; browser long side 2000px tak resize karta hai.
+Stored image maximum 5 MB. SVG/HTML uploads allowed nahi.
+Mobile photos aur poster ka original apne computer par rakhein.
+Publish se public content save hota hai. Visitors page load/refresh par latest content dekhte hain.
+Ek hi waqt multiple admin tabs mein edits na karein; conflict par backup lein, phir reload karein.
+
+LIMITS / IMPORTANT DETAILS
+- Main Admin ka login, authenticated uploads aur live save aapko apne account se test karne hain.
+  Password ki zaroorat assistant ko nahi hai. Simulated UI test live permissions test nahi hota.
+- WhatsApp/call messages automatically read/import nahi hote. Private enquiry notes manually hain.
+- Public content table mein sirf public website content. Customer phone/notes private table mein.
+- Image bucket public hai; usmein private documents na upload karein.
+- Site load par Supabase unavailable ho to bundled assets/js/site-content.js use hota hai.
+  Dashboard > Backup > Export site-content.js ko GitHub mein update karte rahein, warna offline
+  fallback purana content/empty gallery dikha sakta hai.
+- Default theme/language new visitors ke liye; old visitors ki saved preference respect hoti hai.
+- Social previews/crawlers JS metadata par rely nahi karte. Basic SEO edit ke baad Backup tab se
+  jsa-seo.json export karein. File project folder mein rakh kar:
+    python apply-seo.py jsa-seo.json .
+  Phir changed index.html, gallery.html, contact.html GitHub par upload karein.
+- No payments, checkout, booking or online transaction system.
+- Existing Firebase counters are separate. Yeh dashboard unko reset nahi karta.
+- Free service usage limits apply; no paid service added by this package.
+- Backup JSON public content ka hai; images, inquiry export aur Firebase data alag backups hain.
+
+ROLLBACK
+GitHub mein upgrade commit revert kar sakte hain, ya saved original files restore kar sakte hain.
+Supabase tables/images ko rollback ke liye delete karna zaroori nahi.

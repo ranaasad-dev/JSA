@@ -1,0 +1,23 @@
+JSA TEST UPGRADE - LOCAL TEST
+
+1. ZIP ko apne purane project se alag folder mein extract karein.
+2. Us folder mein, jis mein index.html aur admin folder nazar aayen, address bar mein cmd likh kar Enter dabayein.
+3. python -m http.server 8001
+4. Chrome mein http://localhost:8001/admin/ kholein.
+5. Brand & owner mein profile ki Urdu aur English biography likhein. Profile menu bar mein gol photo se khulti hai.
+6. Announcements mein show, Urdu aur English headlines / text aur speed (seconds) set karein. Kam seconds = tez speed. Announcement default band hai.
+7. Appearance mein 8 presets, custom brand/accent colour, English font, dark/light default aur language hain. Visitors ke saved theme preferences unki apni rahengi.
+8. Developer information mein JSA popup card ki information edit hoti hai. AJTech ki alag website is se update nahin hoti.
+
+IMPORTANT: Ye copy aapke maujooda Supabase se connected hai. Publish changes dabane par live connected website ka content bhi badal sakta hai. Pehle Backup download karein. Picture upload bhi live storage mein hoti hai. GitHub par publish na karein jab tak local test complete na ho. Naye website code ki functionality live tab hogi jab ye files GitHub Pages par deploy hongi. Browser/login/upload ka end-to-end test abhi nahin hua.
+
+NAYE CONTROLS: Admin ke Social media section mein TikTok, Facebook, Instagram, YouTube, LinkedIn aur X ke HTTPS links add, hide ya remove karein. Appearance mein website ka font aur size (14-22), aur heading style badlein. Admin ke top bar ke Font aur Size controls sirf is browser ke admin dashboard par apply hote hain. Profile photo desktop aur mobile par logo ke barabar size mein hai.
+
+NAYE MENU AUR PROFILE CONTROLS: Brand & owner mein Profile details se Urdu aur English details add karen. Existing phone aur WhatsApp buttons pehle ki tarah website contact settings use karte hain. Appearance > Menu layout mein horizontal, vertical ya menu (icon) select karein. Logo aur profile dono desktop par 80px aur mobile par 54px hain.
+
+STORAGE MANAGEMENT: Brand & owner ya doosre image fields mein nayi file upload karne ke baad Publish successful hone par, purani managed Supabase image ki references check karke use remove karne ki koshish hogi. Property poster ke liye Properties & gallery mein har photo ke neeche Replace photo input use karein, phir Publish karein. Simple Remove ya property delete storage se photo automatic delete nahi karta. Failed publish par purani file delete nahi hoti. Doosre tabs se save conflict par cleanup skip hota hai. GitHub ki images automatic delete nahi hotin.
+
+Image library mein Review unused images se mumkin unused images ki list dekhein. Har file alag se Delete aur confirm karni hoti hai. System doosri websites, shared links ya purane backups mein image ka istemal verify nahin kar sakta; delete karne se woh links toot sakte hain. Important files ka computer par backup rakhein. Automatic replacement cleanup sirf isi editing session mein tracked images par hota hai; failures aur purani images Image library mein check karein. Website aur storage same live Supabase se connected hain. Login, upload aur delete ka live integration test abhi nahi hua.
+
+WHATSAPP BUTTON: Admin > WhatsApp button mein desktop floating button ki shape, icon, colour, position aur visibility badlein. Mobile call/WhatsApp bar alag hai aur rahegi.
+RESET: Admin > Backup & restore > Reset options. Pehle content backup download karein. Review unused images individual deletion ke liye hai; shared external links ka use verify nahin ho sakta. Gallery reset listings editor se hatata hai, files delete nahin karta. Website reset selected JSON backup se editable public content wapas lata hai aur current memorial aur developer content ko rakhta hai. Dono staged changes hain; Publish se live connected data badal sakta hai. Firebase counters, private notes aur images delete nahin hote. Old images restored nahin hote. Shared Supabase par test karne se live content affect ho sakta hai.
