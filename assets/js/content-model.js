@@ -7,6 +7,12 @@ function normalize(input){
  const c=clone(input);
  c.categories??=['plots','houses','shops','agricultural'].map(id=>({id,name:clone(c.labels[id])}));
  c.navigation??=[{id:'home',label:clone(c.labels.home),url:'index.html',visible:true},{id:'gallery',label:clone(c.labels.gallery),url:'gallery.html',visible:true},{id:'contact',label:clone(c.labels.contact),url:'contact.html',visible:true}];
+ c.labels.office??=bi('Our office','ہمارا دفتر');
+ c.office??={title:bi('Visit our office','ہمارے دفتر تشریف لائیں'),intro:bi('Get in touch with Joyia Estate Advisor for property enquiries.','پراپرٹی سے متعلق معلومات کے لیے جویہ اسٹیٹ ایڈوائزر سے رابطہ کریں۔'),photos:[]};
+ c.office.title??=bi('Visit our office','ہمارے دفتر تشریف لائیں'); c.office.intro??=bi(); c.office.photos??=[];
+ c.office.schedule??={enabled:false,days:bi('',''),opening:'',closing:'',showClock:true};
+ c.office.weekly??={enabled:false,days:['mon','tue','wed','thu','fri','sat','sun'].map(id=>({id,status:'unset',opening:'',closing:''}))};
+ if(!c.navigation.some(x=>x.id==='office'||x.url==='office.html'))c.navigation.push({id:'office',label:bi('Our office','ہمارا دفتر'),url:'office.html',visible:true});
  c.appearance??={defaultTheme:'light',defaultLanguage:'en',accent:'#dbb765'};
  c.appearance.brandColor??='#072b49';
  c.appearance.font??='classic';
@@ -35,7 +41,7 @@ function safeUrl(value,kind='link'){
  if(/[\u0000-\u0020\\]/.test(value))return false;
  if(kind==='image')return /^https:\/\//i.test(value)||/^assets\/images\/[\w./%-]+$/i.test(value);
  if(kind==='audio')return /^https:\/\//i.test(value)||/^assets\/audio\/[\w./%-]+$/i.test(value);
- return /^(https?:\/\/|mailto:|tel:)/i.test(value)||/^(?:index|gallery|contact)\.html(?:#[\w-]+)?$/.test(value)||/^#[\w-]+$/.test(value);
+ return /^(https?:\/\/|mailto:|tel:)/i.test(value)||/^(?:index|gallery|contact|office)\.html(?:#[\w-]+)?$/.test(value)||/^#[\w-]+$/.test(value);
 }
 function validate(c){
  const fail=m=>{throw new Error(m)};
@@ -44,6 +50,9 @@ function validate(c){
  if(c.remembrance.counters.length!==4||!c.remembrance.tracks.length)fail('Keep four memorial counters and at least one audio track.');
  const ids=new Set();for(const p of c.gallery){if(!p.id||ids.has(p.id))fail('Each property needs a unique reference.');ids.add(p.id);if(!['available','sold'].includes(p.status))fail('Choose Available or Sold for '+p.id);if(!c.categories.some(x=>x.id===p.category))fail('Choose a valid category for '+p.id);const photos=p.photos?.length?p.photos:[p.src];if(!photos.length||photos.some(x=>!x||!safeUrl(typeof x==='string'?x:x.src,'image')))fail('Add a valid photo for '+p.id)}
  const cats=new Set();for(const cat of c.categories){if(!/^[a-z0-9-]+$/.test(cat.id)||cat.id==='all'||cats.has(cat.id))fail('Category IDs must be unique lowercase words without spaces.');cats.add(cat.id)}
+ if(!c.office.schedule || typeof c.office.schedule.enabled!=='boolean' || typeof c.office.schedule.showClock!=='boolean' || !c.office.schedule.days || typeof c.office.schedule.days.en!=='string' || typeof c.office.schedule.days.ur!=='string' || ![c.office.schedule.opening,c.office.schedule.closing].every(t=>typeof t==='string' && (!t || /^([01]\d|2[0-3]):[0-5]\d$/.test(t))) || (c.office.schedule.enabled && (!c.office.schedule.opening || !c.office.schedule.closing)))fail('Please enter valid office opening and closing times.');
+ if(!c.office.weekly || typeof c.office.weekly.enabled!=='boolean' || !Array.isArray(c.office.weekly.days) || c.office.weekly.days.length!==7 || c.office.weekly.days.some((d,i)=>!d || d.id!==['mon','tue','wed','thu','fri','sat','sun'][i] || !['unset','open','closed'].includes(d.status) || ![d.opening,d.closing].every(t=>typeof t==='string' && (!t || /^([01]\d|2[0-3]):[0-5]\d$/.test(t))) || (c.office.weekly.enabled && d.status==='open' && (!d.opening||!d.closing))))fail('Check the weekly office hours.');
+ if(!Array.isArray(c.office.photos)||c.office.photos.some(p=>!p||typeof p.image!=='string'||!p.image||!safeUrl(p.image,'image')))fail('Each office photo needs a valid image.');
  if(!c.navigation.some(x=>x.visible))fail('Keep at least one menu link visible.');
  if(!c.whatsappButton||typeof c.whatsappButton.visible!=='boolean'||!['pill','round','square'].includes(c.whatsappButton.shape)||!['whatsapp','phone','text'].includes(c.whatsappButton.icon)||!['left','right'].includes(c.whatsappButton.position)||!/^#[0-9a-f]{6}$/i.test(c.whatsappButton.color))fail('Invalid WhatsApp button settings.');
  if(!['horizontal','vertical','menu'].includes(c.appearance.menuLayout)||!Array.isArray(c.profileDetails))fail('Invalid profile or menu settings.');

@@ -5,3 +5,19 @@ html[data-admin-theme=dark]{--ink:#ecf2f4;--muted:#b8cad2;--line:#38505b;--bg:#0
 body{font-size:var(--admin-font-size,15px)}html[data-admin-font=classic] body{font-family:Georgia,serif}.admin-font-label{display:flex;align-items:center;gap:6px;margin:0;color:var(--ink);font-size:12px}.admin-font-label select{width:auto;margin:0;padding:5px 8px;min-height:40px}
 
 .sticky-search{position:sticky;top:88px;z-index:3;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}.sticky-search .search{margin:0;max-width:500px}@media(max-width:650px){.sticky-search{top:0;z-index:3;padding:8px 0}}
+
+.office-week-editor{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;align-items:end;padding:15px 0;border-bottom:1px solid #8884}.office-week-editor label{margin:0}.office-week-editor select,.office-week-editor input{width:100%}@media(max-width:800px){.office-week-editor{grid-template-columns:1fr 1fr}.office-week-editor strong{grid-column:1/-1}}
+
+.publish-bar {
+  position: sticky;
+  top: 88px;
+  z-index: 5;
+  background: var(--bg);
+  padding: 12px;
+}
+
+@media (max-width: 650px) {
+  .publish-bar {
+    top: 0;
+  }
+}
